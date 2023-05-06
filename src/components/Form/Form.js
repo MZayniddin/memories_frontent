@@ -38,7 +38,7 @@ const Form = ({ currentId, setCurrentId }) => {
         clear();
     };
     const clear = () => {
-        setCurrentId(null);
+        setCurrentId(0);
         setPostData({
             creator: "",
             title: "",
