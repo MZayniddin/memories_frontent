@@ -5,6 +5,6 @@ export default (posts = [], action) => {
         case "CREATE":
             return posts;
         default:
-            break;
+            return posts;
     }
 };
