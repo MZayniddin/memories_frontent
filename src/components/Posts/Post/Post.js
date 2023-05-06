@@ -34,7 +34,7 @@ const Post = ({ post }) => {
                     size="small"
                     onClick={() => {}}
                 >
-                    <MoreHorizIcon fontSize="default" />
+                    <MoreHorizIcon fontSize="medium" />
                 </Button>
             </div>
             <div className={classes.details}>
