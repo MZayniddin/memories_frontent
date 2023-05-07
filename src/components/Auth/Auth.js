@@ -10,6 +10,7 @@ import {
 import { useGoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { auth } from "../../actions/auth";
+import { useNavigate } from "react-router-dom";
 
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./styles";
@@ -21,6 +22,7 @@ const Auth = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isSignUp, setIsSignUp] = useState(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleShowPassword = () => setShowPassword((state) => !state);
 
@@ -35,10 +37,9 @@ const Auth = () => {
 
     const login = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
-            console.log(tokenResponse);
-
             try {
                 dispatch(auth(tokenResponse?.access_token));
+                navigate("/");
             } catch (error) {
                 console.log(error);
             }
