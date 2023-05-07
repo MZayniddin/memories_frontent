@@ -13,7 +13,7 @@ const Navbar = () => {
         <AppBar className={classes.appBar} position="static" color="inherit">
             <div className={classes.brandContainer}>
                 <Typography
-                    // component={Link}
+                    component={Link}
                     to="/"
                     className={classes.heading}
                     variant="h2"
@@ -51,7 +51,7 @@ const Navbar = () => {
                     </div>
                 ) : (
                     <Button
-                        // component={Link}
+                        component={Link}
                         to="/auth"
                         variant="contained"
                         color="primary"
