@@ -7,3 +7,14 @@ export const createPost = (newPost) => axios.post(url, newPost);
 export const updatePost = (id, updatedPost) => axios.patch(`${url}/${id}`, updatedPost);
 export const deletePost = (id) => axios.delete(`${url}/${id}`);
 export const likePost = (id) => axios.patch(`${url}/${id}/likePost`);
+
+export const authUser = (token) =>
+    axios.get(
+        `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${token}`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                Accept: "application/json",
+            },
+        }
+    );

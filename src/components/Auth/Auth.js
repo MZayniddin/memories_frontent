@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
+import { auth } from "../../actions/auth";
 
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./styles";
@@ -35,10 +36,9 @@ const Auth = () => {
     const login = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
             console.log(tokenResponse);
-            const token = tokenResponse?.access_token;
 
             try {
-                dispatch({ type: "AUTH", data: { token } });
+                dispatch(auth(tokenResponse?.access_token));
             } catch (error) {
                 console.log(error);
             }
