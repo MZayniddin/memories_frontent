@@ -16,23 +16,43 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./styles";
 import Input from "./Input";
 import Icon from "./icon";
+import { signin, signup } from "../../actions/auth";
+
+const initialState = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+};
 
 const Auth = () => {
     const classes = useStyles();
     const [showPassword, setShowPassword] = useState(false);
     const [isSignUp, setIsSignUp] = useState(false);
+    const [formData, setFormData] = useState(initialState);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleShowPassword = () => setShowPassword((state) => !state);
 
-    const handleSubmit = () => {};
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if(isSignUp) {
+            dispatch(signup(formData, navigate))
+        } else {
+            dispatch(signin(formData, navigate))
+            
+        }
+    };
 
-    const handleChange = () => {};
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
     const switchMode = () => {
         setIsSignUp((prevIsSignUp) => !prevIsSignUp);
-        handleShowPassword(false);
+        setShowPassword(false);
     };
 
     const login = useGoogleLogin({
@@ -61,16 +81,17 @@ const Auth = () => {
                         {isSignUp && (
                             <>
                                 <Input
-                                    name="firstname"
+                                    name="firstName"
                                     label="First Name"
                                     autoFocus
-                                    onChange={handleChange}
+                                    handleChange={handleChange}
                                     half
                                 />
                                 <Input
-                                    name="firstname"
-                                    label="First Name"
-                                    onChange={handleChange}
+                                    type="text"
+                                    name="lastName"
+                                    label="Last Name"
+                                    handleChange={handleChange}
                                     half
                                 />
                             </>
