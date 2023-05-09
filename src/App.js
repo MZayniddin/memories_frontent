@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar/Navbar";
 
 const App = () => {
     return (
-        <Container maxWidth="lg">
+        <Container maxWidth="xl">
             <Navbar />
             <Outlet />
         </Container>
