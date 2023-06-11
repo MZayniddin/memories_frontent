@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
     Container,
     Grow,
@@ -32,15 +32,14 @@ const Home = () => {
     const page = query.get("page") || 1;
     const searchQuery = query.get("searchQuery");
     const [search, setSearch] = useState("");
-    const [tags, setTags] = useState([]);
+    let [tags, setTags] = useState([]);
 
     const searchPost = () => {
         if (search.trim() || tags) {
-            dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
+            tags = tags.join(",");
+            dispatch(getPostsBySearch({ search, tags }));
             navigate(
-                `/posts/search?searchQuery=${search || "none"}&tags=${tags.join(
-                    ","
-                )}`
+                `/posts/search?searchQuery=${search || "none"}&tags=${tags}`
             );
         } else {
             navigate("/");
@@ -106,7 +105,7 @@ const Home = () => {
                             currentId={currentId}
                             setCurrentId={setCurrentId}
                         />
-                        {(!searchQuery && !tags.length) && (
+                        {!searchQuery && !tags.length && (
                             <Paper className={classes.pagination} elevation={6}>
                                 <Pagination page={page} />
                             </Paper>

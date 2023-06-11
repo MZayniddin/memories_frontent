@@ -4,6 +4,7 @@ import * as api from "../api";
 import {
     FETCH_ALL,
     FETCH_BY_SEARCH,
+    FETCH_POST,
     START_LOADING,
     END_LOADING,
     CREATE,
@@ -13,6 +14,20 @@ import {
 } from "../constants/actionTypes";
 
 // Action Creators
+
+export const getPost = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: START_LOADING });
+        const { data } = await api.fetchPost(id);
+
+        console.log(data);
+
+        dispatch({ type: FETCH_POST, payload: data });
+        dispatch({ type: END_LOADING });
+    } catch (error) {
+        console.log(error.message);
+    }
+};
 
 export const getPosts = (page) => async (dispatch) => {
     try {

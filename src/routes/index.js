@@ -20,7 +20,7 @@ const router = createBrowserRouter(
             <Route path="/posts/search" element={<Home />} />
             <Route path="/posts/:id" element={<PostDetails />} />
             <Route
-                path="auth"
+                path="auth" 
                 element={!user ? <Auth /> : <Navigate to="/posts" replace />}
             />
         </Route>
